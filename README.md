@@ -7,9 +7,10 @@
   Add your open source license, GitHub uses MIT license.
 -->
 
-# GitHub Pages
+# Install conan on windows
 
-_Create a site or blog from your GitHub repositories with GitHub Pages._
+Thanks : https://www.and-fs.de/posts/conan/install-in-venv/
+_Default pip install will install conan in an obscure scripts path._
 
 </header>
 
@@ -21,22 +22,23 @@ _Create a site or blog from your GitHub repositories with GitHub Pages._
   Encourage users to open new tabs for steps!
 -->
 
-## Step 1: Enable GitHub Pages
+Create a virtual environment in a globally accessible location, for instance %ProgramData% (i.e. C:\ProgramData).
+> python -m venv %ProgramData%\.venv-conan
 
-_Welcome to GitHub Pages and Jekyll :tada:!_
+After that you can either activate the new environment and continue working in it, or you can use the Python executables inside the Scripts folder of the virtual environmen directly:
 
-The first step is to enable GitHub Pages on this [repository](https://docs.github.com/en/get-started/quickstart/github-glossary#repository). When you enable GitHub Pages on a repository, GitHub takes the content that's on the main branch and publishes a website based on its contents.
+> %ProgramData%\.venv-conan\Scripts\pip install conan==2.*
 
-### :keyboard: Activity: Enable GitHub Pages
+At least create a symbolic link to the conan executable inside the virtual environments Scripts folder and place it into a location which is inside your systems search %PATH%.
 
-1. Open a new browser tab, and work on the steps in your second tab while you read the instructions in this tab.
-1. Under your repository name, click **Settings**.
-1. Click **Pages** in the **Code and automation** section.
-1. Ensure "Deploy from a branch" is selected from the **Source** drop-down menu, and then select `main` from the **Branch** drop-down menu.
-1. Click the **Save** button.
-1. Wait about _one minute_ then refresh this page (the one you're following instructions from). [GitHub Actions](https://docs.github.com/en/actions) will automatically update to the next step.
-   > Turning on GitHub Pages creates a deployment of your repository. GitHub Actions may take up to a minute to respond while waiting for the deployment. Future steps will be about 20 seconds; this step is slower.
-   > **Note**: In the **Pages** of **Settings**, the **Visit site** button will appear at the top. Click the button to see your GitHub Pages site.
+Another solution can be adding %ProgramData%\.venv-conan\Scripts to %PATH%, but that can cause accidentially using the other executables placed there (such as python or pip).
+Best practice is to have a system wide available folder which contains such links, for instance in %ProgramData%\links and to add this folder to your %PATH%.
+
+> mkdir %ProgramData%\links
+> mklink %ProgramData%\links\conan.exe %ProgramData%\.venv-conan\Scripts\conan.exe
+> set PATH=%PATH%;%ProgramData%\links
+> conan --version
+Conan version 2.14.0
 
 <footer>
 
